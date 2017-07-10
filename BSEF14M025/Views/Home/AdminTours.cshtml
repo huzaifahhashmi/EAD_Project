@@ -1,0 +1,60 @@
+﻿@model List<Entities.TourDTO>
+@{
+    ViewBag.Title = "AdminTours";
+    Layout = "~/Views/Shared/_Header.cshtml";
+    int i = 1;
+    int j = 0;
+}
+<div id="main">
+@foreach (Entities.TourDTO tour in Model)
+{
+    <h3 class="btn-block" style="align-content:center; text-decoration:underline">Tour Plan - @i</h3>
+        <form action='@Url.Content("~/Home/DeleteTour")'>
+            <input type="hidden" name="id" value="@tour.TourID" />
+            <table style="border:2px solid double">
+                <tr>
+                    <th style="font-weight:bolder">From</th>
+                    <th style="font-weight:bolder">To</th>
+                    <th style="font-weight:bolder">Departure Date</th>
+                    <th style="font-weight:bolder">Return Date</th>
+                    <th style="font-weight:bolder">Dues</th>
+                    <th style="font-weight:bolder">Last Date To Register</th>
+                    <th style="font-weight:bolder">Users Registered So Far</th>
+                    <th style="font-weight:bolder">Delete</th>
+                </tr>
+                <tr>
+                    <td>@tour.FromCity</td>
+                    <td>@tour.ToCity</td>
+                    <td>@tour.Departure.ToString("MMMM") @tour.Departure.Day, @tour.Departure.Year</td>
+                    <td>@tour.ReturnDate.ToString("MMMM") @tour.ReturnDate.Day, @tour.ReturnDate.Year</td>
+                    <td>@tour.Dues</td>
+                    <td style="color:red">@tour.SubDeadLine.ToString("MMMM") @tour.SubDeadLine.Day, @tour.SubDeadLine.Year</td>
+                    @{
+                        List<Entities.RegisteredTravellerDTO> rts = BAL.RegisteredTravellerBO.GetAllRegisteredTravellers();
+                        foreach(var rt in rts)
+                        {
+                            if (rt.TourID == tour.TourID)
+                            {
+                                j++;
+                            }
+                        }
+                        <td>@j</td>
+                        j = 0;
+                        }
+                    <td><input type="submit" class="btn-block"></td>
+                </tr>
+            </table>
+        </form>
+                            i++;
+                        }
+    <h2>Create a new Tour Plan</h2>
+    <form action="/Home/SaveTour">
+        From: <input type="text" name="txtFromCity" />
+        To: <input type="text" name="txtToCity" />
+        Dues Submission Deadline: <input type="date" name="txtSubDeadLine" />
+        Departure Date: <input type="date" name="txtDeparture" />
+        ReturnDate Date: <input type="date" name="txtReturn" />
+        Payable Dues: <input type="number" name="txtDues" />
+        <input type="submit" />
+    </form>
+</div>

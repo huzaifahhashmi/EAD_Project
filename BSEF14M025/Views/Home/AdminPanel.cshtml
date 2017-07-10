@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "AdminPanel";
+    Layout = "~/Views/Shared/_Header.cshtml";
+}
+<div id="main">
+    <h2 style="text-decoration:underline">AdminPanel</h2>
+    <table style="width:inherit">
+        <tr>
+            <th>@Html.ActionLink("Tours", "AdminTours", "Home")</th>
+            <th style="align-content:flex-end">@Html.ActionLink("Users", "AdminUsers", "Home")</th>
+        </tr>
+    </table>
+</div>
+

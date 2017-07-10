@@ -1,0 +1,34 @@
+﻿@model List<Entities.UsersDTO>
+@{
+    ViewBag.Title = "AdminUsers";
+    Layout = "~/Views/Shared/_Header.cshtml";
+}
+
+<h2>AdminUsers</h2>
+
+<div id="main">
+    @foreach (Entities.UsersDTO user in Model)
+    {
+        <form action='@Url.Content("~/Home/DeleteUser")'>
+            <input type="hidden" name="id" value="@user.UserID" />
+            <table style="border:2px solid double">
+                <tr>
+                    <th style="font-weight:bolder">UserName</th>
+                    <th style="font-weight:bolder">Password</th>
+                    <th style="font-weight:bolder">Email</th>
+                    <th style="font-weight:bolder">PhoneNumber</th>
+                    <th style="font-weight:bolder">Delete</th>
+                </tr>
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@user.Password</td>
+                    <td>@user.Email</td>
+                    <td>@user.PhoneNumber</td>
+                   
+                    <td><input type="submit" class="btn-block"></td>
+                </tr>
+            </table>
+        </form>
+        
+    }
+</div>

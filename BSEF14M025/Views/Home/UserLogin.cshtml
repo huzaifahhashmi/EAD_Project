@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Header.cshtml";
+}
+
+
+<div id="main">
+    <h2>Login</h2>
+    <form>
+        User Name: <input style="border:1px solid black" type="text" name="txtLogin" /><br /><br />
+        Password: <input style="border:1px solid black" type="password" name="txtPassword" /><br /><br /><br />
+        <input style="align-self:center" type="submit" value="Login" />
+    </form>
+    <h2>New?</h2>
+    <h3>You may wanna SignUp</h3>
+    <form action="/Home/SignUp" method="post"> 
+        User Name: <input style="border:1px solid black" type="text" name="txtLogin" />
+        Password: <input style="border:1px solid black" type="password" name="txtPassword" />
+        Email: <input style="border:1px solid black" type="email" name="txtEmail" />
+        Phone Number: <input style="border:1px solid black" type="text" name="txtPhoneNumber" />
+        <input style="align-self:center" type="submit" value="SignUp" />
+    </form>
+</div>

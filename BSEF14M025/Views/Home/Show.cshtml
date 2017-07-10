@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Travel Plans";
+    Layout = "~/Views/Shared/_Header.cshtml";
+    Int32 i = 1;
+
+}
+
+<!-- Main -->
+<div id="main">
+    
+    @foreach (Entities.TourDTO tour in Model)
+    {
+        <h3 class="btn-block" style="align-content:center; text-decoration:underline">Tour Plan - @i</h3>
+        <form action='@Url.Content("~/Home/Register")'>
+            <input type="hidden" name="id" value="@tour.TourID"/>
+            <table style="border:2px solid double">
+                <tr>
+                    <th style="font-weight:bolder">From</th>
+                    <th style="font-weight:bolder">To</th>
+                    <th style="font-weight:bolder">Departure Date</th>
+                    <th style="font-weight:bolder">Return Date</th>
+                    <th style="font-weight:bolder">Dues</th>
+                    <th style="font-weight:bolder">Last Date To Register</th>
+                    <th style="font-weight:bolder">Register Now!</th>
+                </tr>
+                <tr>
+                    <td>@tour.FromCity</td>
+                    <td>@tour.ToCity</td>
+                    <td>@tour.Departure.ToString("MMMM") @tour.Departure.Day, @tour.Departure.Year</td>
+                    <td>@tour.ReturnDate.ToString("MMMM") @tour.ReturnDate.Day, @tour.ReturnDate.Year</td>
+                    <td>@tour.Dues</td>
+                    <td style="color:red">@tour.SubDeadLine.ToString("MMMM") @tour.SubDeadLine.Day, @tour.SubDeadLine.Year</td>
+
+                    <td><input type="submit" class="btn-block"></td>
+                </tr>
+            </table>
+        </form>
+        i++;
+    }
+    
+    <p>
+        @{
+            if (BSEF14M025.Security.SessionManager.IsValidUser)
+            {
+                <h3>Your already booked seats:</h3>
+                List<Entities.RegisteredTravellerDTO> rt = BAL.RegisteredTravellerBO.GetAllRegisteredTravellers();
+                List<Entities.TourDTO> tours = BAL.TourBO.GetAllTours();
+                List<Entities.UsersDTO> users = BAL.UsersBO.GetAllUsers();
+
+                List<Entities.TourDTO> thisUsersTours = new List<Entities.TourDTO>();
+
+                foreach (var regTrav in rt)
+                {
+                    foreach (var user in users)
+                    {
+                        if (regTrav.UserID == user.UserID)
+                        {
+                            foreach (var tour in tours)
+                            {
+                                if (regTrav.TourID == tour.TourID)
+                                {
+                                <table style="border:2px solid double">
+                                    <tr>
+                                        <th style="font-weight:bolder">From</th>
+                                        <th style="font-weight:bolder">To</th>
+                                        <th style="font-weight:bolder">Departure Date</th>
+                                        <th style="font-weight:bolder">Return Date</th>
+                                    </tr>
+                                    <tr>
+                                        <td>@tour.FromCity</td>
+                                        <td>@tour.ToCity</td>
+                                        <td>@tour.Departure.ToString("MMMM") @tour.Departure.Day, @tour.Departure.Year</td>
+                                        <td>@tour.ReturnDate.ToString("MMMM") @tour.ReturnDate.Day, @tour.ReturnDate.Year</td>
+
+                                    </tr>
+                                </table>
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+    </p>
+</div>

@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Header.cshtml";
+}
+
+<!-- Main -->
+<div id="main">
+
+    <!-- Featured Post -->
+    <article class="post featured">
+        <header class="major">
+            <span class="date">@DateTime.Now.ToString("MMMM") @DateTime.Now.Day, @DateTime.Now.Year</span>
+            <h2>
+                    Wanna TRAvel?<br />
+                    Let's GO
+            </h2>
+            <p>
+                We, here at TraGo, do our best to give you a wonderful experience<br />
+                and to make your journey a beautiful one<br />
+                Happy Journey! :)
+            </p>
+        </header>
+        <div class="image main"><img src="~/images/pic01.jpg" alt="" /></div>
+        <div class="button big">@Html.ActionLink("Show Travel Plans", "Show", "Home")</div>
+    </article>
+
+    <!-- Posts -->
+    <section class="posts">
+        <article>
+            <header>
+                <h2>
+                        Worried about<br />
+                        Rates?
+                </h2>
+            </header>
+            <div class="image fit"><img src="images/pic02.jpg" alt="" /></div>
+            <p>We assure the minimum rates in the market</p>
+            
+        </article>
+        <article>
+            <header>
+                <h2>
+                        Worried about<br />
+                        Comfort or Security?
+                </h2>
+            </header>
+            <div class="image fit"><img src="images/pic03.jpg" alt="" /></div>
+            <p>We, at TraGo, do our best to assure you that our trips will be comfy and secure as well.</p>
+            
+        </article>
+    </section>
+</div>

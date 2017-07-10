@@ -1,0 +1,89 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>TraGo - Wanna Travel? Let's Go</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href='@Url.Content("~/assets/css/main.css")' />
+    <noscript><link rel="stylesheet" href='@Url.Content("~/assets/css/noscript.css")' /></noscript>
+</head>
+<body class="is-loading">
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <div class="logo">TraGo</div>
+        </header>
+
+        <!-- Nav -->
+        <nav id="nav">
+            <ul class="links">
+                @if (Request.Url.LocalPath.Equals("/") || Request.Url.LocalPath.Equals("/Home/Index"))
+                {
+                    <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                }
+                @if (Request.Url.LocalPath.Equals("/Home/Show"))
+                {
+                    <li class="active">@Html.ActionLink("Show Plans", "Show", "Home")</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Show Plans", "Show", "Home")</li>
+                }
+            </ul>
+            <ul class="icons">
+                @if (BSEF14M025.Security.AdminSessionManager.IsValidAdmin == false)
+                {
+                    if (BSEF14M025.Security.SessionManager.IsValidUser == false)
+                    {
+                        <li><button style="background-color:forestgreen">@Html.ActionLink("Login", "UserLogin", "Home")</button></li>
+                    }
+                    else
+                    {
+                        <li><button style="background-color:forestgreen">@Html.ActionLink("Logout (" + BSEF14M025.Security.SessionManager.User.UserName + ")", "Logout", "Home")</button></li>
+                    }
+                }
+                else
+                {
+                    <li><button style="background-color:forestgreen">@Html.ActionLink("Admin Panel", "AdminPanel", "Home")</button></li>
+                }
+            </ul>
+        </nav>
+        @RenderBody()
+
+
+        <!-- Copyright -->
+        <div id="copyright">
+            <ul><li>&copy; TraGo</li><li><span>Travel, Go!</span></li></ul><br />
+            @if (BSEF14M025.Security.AdminSessionManager.IsValidAdmin == false)
+            {
+                <ul><li>@Html.ActionLink("Admin Login", "AdminLogin", "Home")</li></ul>
+            }
+            else
+            {
+                <ul><li>@Html.ActionLink("Logout", "AdminLogout", "Home")</li></ul>
+            }
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src='@Url.Content("~/assets/js/jquery.min.js")'></script>
+    <script src='@Url.Content("~/assets/js/jquery.scrollex.min.js")'></script>
+    <script src='@Url.Content("~/assets/js/jquery.scrolly.min.js")'></script>
+    <script src='@Url.Content("~/assets/js/skel.min.js")'></script>
+    <script src='@Url.Content("~/assets/js/util.js")'></script>
+    <script src='@Url.Content("~/assets/js/main.js")'></script>
+</body>
+</html>
